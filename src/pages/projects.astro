@@ -1,0 +1,59 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+
+const projects = await Promise.all(
+  (await getCollection('projects', ({ data }) => !data.draft))
+    .sort((a, b) => a.data.sortOrder - b.data.sortOrder)
+    .map(async (entry) => {
+      const { Content } = await render(entry);
+
+      return { entry, Content };
+    }),
+);
+---
+
+<BaseLayout title="Projects">
+  <section class="space-y-10">
+    <PageHeader
+      eyebrow="Selected Projects"
+      title="Projects should translate technical work into readable value"
+      summary="Use this page for concise, outcome-focused summaries that show what was built, why it mattered, and what role you played."
+    />
+
+    <div class="grid gap-6">
+      {projects.length > 0 ? (
+        projects.map(({ entry, Content }) => (
+          <article class="rounded-2xl border border-white/10 bg-white/5 p-6">
+            <div class="flex flex-wrap items-start justify-between gap-4">
+              <div class="space-y-3">
+                <p class="text-sm font-medium text-cyan-300">{entry.data.role ?? 'Project entry'}</p>
+                <h2 class="text-2xl font-semibold tracking-tight text-white">{entry.data.title}</h2>
+                <p class="leading-7 text-slate-300">{entry.data.summary}</p>
+              </div>
+              {entry.data.stack.length > 0 && (
+                <ul class="flex flex-wrap gap-2 text-sm text-slate-200">
+                  {entry.data.stack.map((item) => (
+                    <li class="rounded-full border border-white/10 px-3 py-1">{item}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            <div class="article-content mt-5">
+              <Content />
+            </div>
+          </article>
+        ))
+      ) : (
+        <article class="rounded-2xl border border-dashed border-white/15 bg-white/5 p-6">
+          <h2 class="text-xl font-semibold text-white">No public project entries yet</h2>
+          <p class="mt-3 leading-7 text-slate-300">
+            Add MDX entries under <code>src/content/projects</code> to populate this section with concise, employer-readable project summaries.
+          </p>
+        </article>
+      )}
+    </div>
+  </section>
+</BaseLayout>

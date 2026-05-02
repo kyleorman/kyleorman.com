@@ -1,0 +1,66 @@
+---
+import '../styles/global.css';
+import { navigation, siteMeta } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = siteMeta.description } = Astro.props;
+const pageTitle = title ? `${title} | ${siteMeta.siteName}` : `${siteMeta.name} | ${siteMeta.siteName}`;
+const pathname = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en" class="bg-slate-950 text-slate-100">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{pageTitle}</title>
+  </head>
+  <body class="min-h-screen bg-slate-950 text-slate-100 antialiased">
+    <div class="absolute inset-x-0 top-0 -z-10 h-[28rem] bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.14),transparent_58%)]"></div>
+    <header class="border-b border-white/10 bg-slate-950/80 backdrop-blur">
+      <div class="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-5 md:flex-row md:items-center md:justify-between">
+        <a href="/" class="text-lg font-semibold tracking-tight text-white">{siteMeta.siteName}</a>
+        <nav aria-label="Primary">
+          <ul class="flex flex-wrap gap-2 text-sm text-slate-300">
+            {navigation.map((item) => {
+              const isActive = pathname === item.href;
+
+              return (
+                <li>
+                  <a
+                    href={item.href}
+                    class:list={[
+                      'rounded-full px-3 py-2 transition hover:bg-white/5 hover:text-white',
+                      isActive && 'bg-white/10 text-white',
+                    ]}
+                    aria-current={isActive ? 'page' : undefined}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-6 py-12 md:py-16">
+      <slot />
+    </main>
+
+    <footer class="border-t border-white/10">
+      <div class="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-8 text-sm text-slate-400 md:flex-row md:items-center md:justify-between">
+        <p>Built with Astro, TypeScript, Tailwind CSS, and MDX.</p>
+        <p>Designed for a professional public-facing presentation with room for technical and academic depth.</p>
+      </div>
+    </footer>
+  </body>
+</html>

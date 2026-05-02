@@ -1,0 +1,50 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ContentCard from '../components/ContentCard.astro';
+import { educationPrompts } from '../data/site';
+
+const researchEntries = await Promise.all(
+  (await getCollection('research', ({ data }) => !data.draft))
+    .sort((a, b) => a.data.sortOrder - b.data.sortOrder)
+    .map(async (entry) => {
+      const { Content } = await render(entry);
+
+      return { entry, Content };
+    }),
+);
+---
+
+<BaseLayout title="Education & Research">
+  <section class="space-y-10">
+    <PageHeader
+      eyebrow="Education & Research"
+      title="Academic work should add depth without overstating weight"
+      summary="This section is the home for degrees, PhD progress, research focus, and publications or presentations that are appropriate to present publicly."
+    />
+
+    <div class="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
+      <div class="space-y-6">
+        {educationPrompts.map((item, index) => (
+          <ContentCard title={`Guideline ${index + 1}`} summary={item} />
+        ))}
+      </div>
+
+      <div class="space-y-6">
+        {researchEntries.map(({ entry, Content }) => (
+          <article class="rounded-2xl border border-white/10 bg-white/5 p-6">
+            <div class="space-y-3">
+              <p class="text-sm font-medium text-cyan-300">{entry.data.status}</p>
+              <h2 class="text-2xl font-semibold tracking-tight text-white">{entry.data.title}</h2>
+              <p class="leading-7 text-slate-300">{entry.data.summary}</p>
+              <div class="article-content">
+                <Content />
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

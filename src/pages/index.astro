@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContentCard from '../components/ContentCard.astro';
+import { focusAreas, homeHighlights, siteMeta } from '../data/site';
+---
+
+<BaseLayout>
+  <section class="grid gap-8 lg:grid-cols-[1.3fr_0.7fr] lg:items-end">
+    <div class="space-y-6">
+      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">Professional website foundation</p>
+      <h1 class="max-w-4xl text-4xl font-semibold tracking-tight text-white md:text-6xl">
+        {siteMeta.name}
+      </h1>
+      <p class="max-w-3xl text-xl leading-8 text-slate-300">
+        Computer engineering professional with a design verification focus, building a public profile that is clear,
+        credible, and appropriate for employers, collaborators, and academic readers.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a href="/experience" class="rounded-full bg-cyan-300 px-5 py-3 font-medium text-slate-950 transition hover:bg-cyan-200">
+          View experience structure
+        </a>
+        <a href="/education-research" class="rounded-full border border-white/15 px-5 py-3 font-medium text-white transition hover:bg-white/5">
+          Explore education & research
+        </a>
+      </div>
+    </div>
+
+    <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
+      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">Current emphasis</p>
+      <ul class="mt-4 space-y-4 text-slate-300">
+        {homeHighlights.map((item) => (
+          <li class="flex gap-3 leading-7">
+            <span class="mt-2 h-2.5 w-2.5 rounded-full bg-cyan-300"></span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="mt-16 space-y-6">
+    <div class="max-w-3xl space-y-3">
+      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">Site focus</p>
+      <h2 class="text-3xl font-semibold tracking-tight text-white">A professional-first structure with room for depth</h2>
+      <p class="leading-8 text-slate-300">
+        This first pass emphasizes strong information architecture and polished presentation before detailed public content is added.
+      </p>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-3">
+      {focusAreas.map((item) => (
+        <ContentCard title={item.title} summary={item.description} />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

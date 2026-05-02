@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { aboutPoints } from '../data/site';
+---
+
+<BaseLayout title="About">
+  <section class="space-y-10">
+    <PageHeader
+      eyebrow="About"
+      title="A professional profile designed for clarity and credibility"
+      summary="This section introduces the core narrative of the site and sets up the professional, technical, and academic context that supports the rest of the portfolio."
+    />
+
+    <div class="grid gap-6 md:grid-cols-[1.2fr_0.8fr]">
+      <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
+        <p class="leading-8 text-slate-300">
+          The initial version of this page keeps the story measured and high-level. As final content is added, this section should become the short narrative bridge between experience, research direction, and selected technical work.
+        </p>
+      </div>
+
+      <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
+        <h2 class="text-lg font-semibold text-white">What this page should communicate</h2>
+        <ul class="mt-4 space-y-3 text-slate-300">
+          {aboutPoints.map((item) => (
+            <li class="flex gap-3 leading-7">
+              <span class="mt-2 h-2.5 w-2.5 rounded-full bg-cyan-300"></span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

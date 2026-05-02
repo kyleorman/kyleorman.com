@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ContentCard from '../components/ContentCard.astro';
+import { experiencePrompts } from '../data/site';
+---
+
+<BaseLayout title="Experience">
+  <section class="space-y-10">
+    <PageHeader
+      eyebrow="Experience"
+      title="Professional experience should be the fastest section to scan"
+      summary="Employers should be able to understand role progression, current direction, and practical impact from this page with minimal effort."
+    />
+
+    <div class="grid gap-6 md:grid-cols-3">
+      {experiencePrompts.map((item, index) => (
+        <ContentCard title={`Placeholder ${index + 1}`} summary={item} />
+      ))}
+    </div>
+  </section>
+</BaseLayout>
