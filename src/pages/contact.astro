@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import ContentCard from '../components/ContentCard.astro';
-import { contactPrompts } from '../data/site';
+import { contactProfiles } from '../data/site';
 ---
 
 <BaseLayout title="Contact">
@@ -10,12 +10,16 @@ import { contactPrompts } from '../data/site';
     <PageHeader
       eyebrow="Contact"
       title="Keep contact options simple, public-safe, and intentional"
-      summary="For the first public version, prioritize a small number of professional contact channels rather than overexposing private information."
+      summary="These public links provide the clearest external references for professional, academic, and technical context without exposing private contact details."
     />
 
-    <div class="grid gap-6 md:grid-cols-3">
-      {contactPrompts.map((item) => (
-        <ContentCard title={item.label} summary={item.value} />
+    <div class="grid gap-6 md:grid-cols-2">
+      {contactProfiles.map((item) => (
+        <ContentCard title={item.label} summary={item.value}>
+          <a href={item.href} class="text-sm text-cyan-300 underline transition hover:text-cyan-200" target="_blank" rel="noreferrer">
+            Visit link
+          </a>
+        </ContentCard>
       ))}
     </div>
   </section>

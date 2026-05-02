@@ -3,7 +3,7 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import ContentCard from '../components/ContentCard.astro';
-import { educationPrompts } from '../data/site';
+import { educationCards } from '../data/site';
 
 const researchEntries = await Promise.all(
   (await getCollection('research', ({ data }) => !data.draft))
@@ -21,13 +21,13 @@ const researchEntries = await Promise.all(
     <PageHeader
       eyebrow="Education & Research"
       title="Academic work should add depth without overstating weight"
-      summary="This section is the home for degrees, PhD progress, research focus, and publications or presentations that are appropriate to present publicly."
+      summary="Education, current PhD progress, lab affiliation, and research direction live here, along with any publications or presentations that are appropriate to present publicly and proportionally."
     />
 
     <div class="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
       <div class="space-y-6">
-        {educationPrompts.map((item, index) => (
-          <ContentCard title={`Guideline ${index + 1}`} summary={item} />
+        {educationCards.map((item) => (
+          <ContentCard title={item.title} summary={item.description} meta={item.meta} />
         ))}
       </div>
 

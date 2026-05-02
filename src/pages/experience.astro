@@ -2,21 +2,27 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import ContentCard from '../components/ContentCard.astro';
-import { experiencePrompts } from '../data/site';
+import { experienceSignals } from '../data/site';
 ---
 
 <BaseLayout title="Experience">
   <section class="space-y-10">
     <PageHeader
       eyebrow="Experience"
-      title="Professional experience should be the fastest section to scan"
-      summary="Employers should be able to understand role progression, current direction, and practical impact from this page with minimal effort."
+      title="Publicly verifiable experience signals"
+      summary="This page currently emphasizes the professional and academic context that can be stated accurately from public sources and project history."
     />
 
-    <div class="grid gap-6 md:grid-cols-3">
-      {experiencePrompts.map((item, index) => (
-        <ContentCard title={`Placeholder ${index + 1}`} summary={item} />
+    <div class="grid gap-6 md:grid-cols-2">
+      {experienceSignals.map((item) => (
+        <ContentCard title={item.title} summary={item.description} meta={item.meta} />
       ))}
+    </div>
+
+    <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
+      <p class="leading-8 text-slate-300">
+        As more resume-ready material is added, this section can be expanded into a fuller role-by-role history. For now, the emphasis stays on experience that is already supported by public project pages, academic listings, and open-source work.
+      </p>
     </div>
   </section>
 </BaseLayout>

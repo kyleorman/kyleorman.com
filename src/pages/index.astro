@@ -1,27 +1,35 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContentCard from '../components/ContentCard.astro';
-import { focusAreas, homeHighlights, siteMeta } from '../data/site';
+import { focusAreas, homeHighlights, profileLinks, siteMeta } from '../data/site';
 ---
 
 <BaseLayout>
   <section class="grid gap-8 lg:grid-cols-[1.3fr_0.7fr] lg:items-end">
     <div class="space-y-6">
-      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">Professional website foundation</p>
+      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">Professional profile</p>
       <h1 class="max-w-4xl text-4xl font-semibold tracking-tight text-white md:text-6xl">
         {siteMeta.name}
       </h1>
       <p class="max-w-3xl text-xl leading-8 text-slate-300">
-        Computer engineering professional with a design verification focus, building a public profile that is clear,
-        credible, and appropriate for employers, collaborators, and academic readers.
+        Computer engineering PhD student with a design verification focus, a background in broadcast engineering,
+        and public technical work spanning HDL tooling, machine learning implementation, and workflow automation.
       </p>
       <div class="flex flex-wrap gap-3">
         <a href="/experience" class="rounded-full bg-cyan-300 px-5 py-3 font-medium text-slate-950 transition hover:bg-cyan-200">
-          View experience structure
+          View experience
         </a>
         <a href="/education-research" class="rounded-full border border-white/15 px-5 py-3 font-medium text-white transition hover:bg-white/5">
           Explore education & research
         </a>
+      </div>
+
+      <div class="flex flex-wrap gap-4 text-sm text-slate-300">
+        {profileLinks.slice(0, 3).map((item) => (
+          <a href={item.href} class="underline transition hover:text-white" target="_blank" rel="noreferrer">
+            {item.label}
+          </a>
+        ))}
       </div>
     </div>
 
@@ -40,10 +48,10 @@ import { focusAreas, homeHighlights, siteMeta } from '../data/site';
 
   <section class="mt-16 space-y-6">
     <div class="max-w-3xl space-y-3">
-      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">Site focus</p>
-      <h2 class="text-3xl font-semibold tracking-tight text-white">A professional-first structure with room for depth</h2>
+      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">Areas of focus</p>
+      <h2 class="text-3xl font-semibold tracking-tight text-white">Engineering, research, and practical tooling</h2>
       <p class="leading-8 text-slate-300">
-        This first pass emphasizes strong information architecture and polished presentation before detailed public content is added.
+        The public record available so far points most clearly to graduate study, engineering tooling, and practical project work.
       </p>
     </div>
 

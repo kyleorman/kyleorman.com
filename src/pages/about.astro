@@ -8,19 +8,25 @@ import { aboutPoints } from '../data/site';
   <section class="space-y-10">
     <PageHeader
       eyebrow="About"
-      title="A professional profile designed for clarity and credibility"
-      summary="This section introduces the core narrative of the site and sets up the professional, technical, and academic context that supports the rest of the portfolio."
+      title="A transition from broadcast engineering into computer engineering research and tooling"
+      summary="This profile is intended to be easy for employers to scan while still reflecting academic work, technical depth, and the communication strengths carried forward from earlier engineering experience."
     />
 
     <div class="grid gap-6 md:grid-cols-[1.2fr_0.8fr]">
-      <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
+      <div class="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-5">
         <p class="leading-8 text-slate-300">
-          The initial version of this page keeps the story measured and high-level. As final content is added, this section should become the short narrative bridge between experience, research direction, and selected technical work.
+          Kyle Orman is a computer engineering PhD student at the University of Arkansas with a stated emphasis on design verification and a broader interest in practical systems work.
+        </p>
+        <p class="leading-8 text-slate-300">
+          Public project and repository history shows recurring work in machine learning implementation, HDL tooling, terminal workflow automation, and Nix-based development environments.
+        </p>
+        <p class="leading-8 text-slate-300">
+          Earlier broadcast engineering experience remains relevant because it supports clear communication, operational thinking, troubleshooting under constraints, and a presentation style that values clarity over noise.
         </p>
       </div>
 
       <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
-        <h2 class="text-lg font-semibold text-white">What this page should communicate</h2>
+        <h2 class="text-lg font-semibold text-white">What stands out publicly right now</h2>
         <ul class="mt-4 space-y-3 text-slate-300">
           {aboutPoints.map((item) => (
             <li class="flex gap-3 leading-7">
